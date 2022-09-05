@@ -11,7 +11,7 @@ import XCTest
 class Injection_Of_DependencyTests: XCTestCase {
     
     private var sut: ResultViewModel! = nil
-    private var calculateIMC: CalculateIMCDelegate! = nil
+    private var calculateIMC: CalculateImcMock! = nil
     
     override func setUp() {
         super.setUp()
@@ -23,22 +23,24 @@ class Injection_Of_DependencyTests: XCTestCase {
     
     func testGetImcWithSuccess() {
         // Given
-
+        let expectationSuccess = expectation(description: "Call method with success")
         
         //When
-        calculateIMC.calculateIMC(height: 0.0, weight: 0.0) { text, color in
-            XCTAssertEqual("Saudavel", text)
-            XCTAssertEqual(color, .green)
+        calculateIMC.calculateIMCCompletionHandler = { height, weight, completion in
+            XCTAssertEqual(height, 1.90)
+            XCTAssertEqual(weight, 87)
+            expectationSuccess.fulfill()
         }
         
         //Then
         sut.getImc(height: 1.90, weight: 87)
+        waitForExpectations(timeout: 2.0)
     }
 }
 
 class CalculateImcMock: CalculateIMCDelegate {
     
-    var calculateIMCCompletionHandler: ((_ height: Double, _ weight: Double, _ completion: (String, UIColor) -> Void) -> Void)?
+    public var calculateIMCCompletionHandler: ((_ height: Double, _ weight: Double, _ completion: (String, UIColor) -> Void) -> Void)?
     
     func calculateIMC(height: Double, weight: Double, _ completion: (String, UIColor) -> Void) {
         calculateIMCCompletionHandler?(height, weight, completion)

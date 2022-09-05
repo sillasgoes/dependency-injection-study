@@ -15,7 +15,7 @@ class ResultViewController: UIViewController {
     
     private var result = UILabel()
     
-    let viewModel = ResulViewModel()
+    let viewModel = ResultViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +47,7 @@ class ResultViewController: UIViewController {
     }
 }
 
-extension ResultViewController: setupViewDelegate {
+extension ResultViewController: SetupViewDelegate {
     func setupView(result: ResultModel) {
         DispatchQueue.main.async { [ weak self ] in
             self?.result.text = result.resultImc

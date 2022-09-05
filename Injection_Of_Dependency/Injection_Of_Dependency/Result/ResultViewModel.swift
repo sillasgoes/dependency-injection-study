@@ -8,30 +8,25 @@
 import Foundation
 import UIKit
 
-protocol setupViewDelegate: AnyObject {
+protocol SetupViewDelegate: AnyObject {
     func setupView(result: ResultModel)
 }
 
-class ResulViewModel {
+class ResultViewModel {
     
     let calculateImc: CalculateIMCDelegate?
     var text: String?
     var color: UIColor?
     
-    weak var delegate: ResultViewController?
+   weak var delegate: SetupViewDelegate?
     
     init(calculateImc: CalculateIMCDelegate? = CalculateIMC()) {
         self.calculateImc = calculateImc
     }
     
-    func receiverResultOfImc(text: String, color: UIColor) {
-        self.text = text
-        self.color = color
-    }
-    
     func getImc(height: Double, weight: Double){
-        calculateImc?.calculateIMC(height: height, weight: weight, { text, color in
+        calculateImc?.calculateIMC(height: height, weight: weight) { text, color in
             delegate?.setupView(result: ResultModel(resultImc: text, backgroundColor: color))
-        })
+        }
     }
 }

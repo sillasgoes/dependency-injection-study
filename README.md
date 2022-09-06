@@ -4,7 +4,7 @@ Estudos sobre injecção de dependência e códigos testáveis usando MVVM como 
 
 Foram usadaos nesse projeto: 
 
-* Injecção de dependência 
+* Injeção de dependência 
 * Viewcode com Autolayout
 * Teste unitário 
 

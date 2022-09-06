@@ -1,4 +1,4 @@
-# dependency-injection-study
+# Estudo de injecção de dependência 
 
 Estudos sobre injecção de dependência e códigos testáveis usando MVVM como padrão de projeto
 
